@@ -11,13 +11,19 @@ void bubble_sort(int st,int dr,int *l){
         not_sorted=0;
         //printf("succes");
         for (int i=st; i<dr-1; i++){
-            if (!(*(l+i)<*(l+i+1))){
+            if (*(l+i)>*(l+i+1)){
                 int temp=*(l+i);
                 *(l+i)=*(l+i+1);
                 *(l+i+1)=temp;
                 not_sorted=1;
             }
         }
+        /*for (int i=st; i<dr; i++){
+            printf("%d ",*(l+i));
+        }
+            printf("\n");*/
+        //int value;
+        //scanf("%d",&value);
     }while(not_sorted);
 }
 void selection_sort(int st,int dr,int *l){
@@ -32,7 +38,7 @@ void selection_sort(int st,int dr,int *l){
         int temp=*(l+i);
         *(l+i)=*(l+poz_el);
         *(l+poz_el)=temp;
-        printf("%d\n",poz_el);
+        //printf("%d\n",poz_el);
     }
 }
 void insertion_sort(int st,int dr,int *l){
@@ -81,7 +87,7 @@ void merge_sort(int st,int dr,int *l){
     }
 }
 int partition(int low,int high,int *l){
-    int pivot=*(l+high-1);
+    int pivot=*(l+high);
     int i=(low-1);
     for (int j=low; j<high; j++){
         if (*(l+j)<pivot){
@@ -92,15 +98,15 @@ int partition(int low,int high,int *l){
         }
     }
     int temp=*(l+i+1);
-    *(l+i+1)=*(l+high-1);
-    *(l+high-1)=temp;
+    *(l+i+1)=*(l+high);
+    *(l+high)=temp;
     return i+1;
 }
 void quick_sort(int low,int high,int *l){
     if (low<high-1){
         int pi=partition(low,high,l);
-        quick_sort(low,pi,l);
-        quick_sort(pi,high,l);
+        quick_sort(low,pi-1,l);
+        quick_sort(pi+1,high,l);
     }
 }
 int main(){
@@ -115,7 +121,7 @@ int main(){
     *(sort_alg+2)=insertion_sort;
     *(sort_alg+3)=merge_sort;
     *(sort_alg+4)=quick_sort;
-    for (int i=1; i<=20; i++){
+    for (int i=1; i<=10; i++){
         char *file_name;
         file_name=malloc(sizeof(char)*50);
         strcpy(file_name,"grader_test");
@@ -142,14 +148,21 @@ int main(){
         for (int j=0; j<n; j++){
             fscanf(input_file,"%d",(v+j));
         }
+        fclose(input_file);
+        printf("%d\n",i);
         for (int it=0; it<5; it++){
+            int *l=malloc(sizeof(int)*n);
+            for (int j=0; j<n; j++)
+            l[j]=v[j];
             clock_t t;
             t=clock();
-            sort_alg[it](0,n,v);
+            sort_alg[it](0,n,l);
             t=clock()-t;
             double time_taken=((double)t)/CLOCKS_PER_SEC;
+            printf("%d ",it);
             fprintf(output_files[it],"%f\n",time_taken);
         }
+        //printf("\n");
         //printf("succesfully read file %s\n",file_name);
         }
         else {
@@ -158,5 +171,6 @@ int main(){
         free(add);
         free(file_name);
     }
+    //printf("succes");
     return 0;
 }
