@@ -139,8 +139,8 @@ int main(){
         if (input_file!=NULL){
         fscanf(input_file,"%d",&n);
         v=malloc(sizeof(int)*n);
-        for (int i=0; i<n; i++){
-            fscanf(input_file,"%d",(v+i));
+        for (int j=0; j<n; j++){
+            fscanf(input_file,"%d",(v+j));
         }
         for (int it=0; it<5; it++){
             clock_t t;
