@@ -126,23 +126,23 @@ int main()
     switch(choice){
     case 0:
         sort_alg=bubble_sort;
-        output_file=fopen("bubble2.out","w");
+        output_file=fopen("bubble.out","w");
         break;
     case 1:
         sort_alg=selection_sort;
-        output_file=fopen("selection2.out","w");
+        output_file=fopen("selection.out","w");
         break;
     case 2:
         sort_alg=insertion_sort;
-        output_file=fopen("insertion2.out","w");
+        output_file=fopen("insertion.out","w");
         break;
     case 3:
         sort_alg=merge_sort;
-        output_file=fopen("merge2.out","w");
+        output_file=fopen("merge.out","w");
         break;
     case 4:
         sort_alg=quick_sort;
-        output_file=fopen("quick2.out","w");
+        output_file=fopen("quick.out","w");
         break;
     default:
         break;
